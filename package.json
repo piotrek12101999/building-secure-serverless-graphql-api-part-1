@@ -1,0 +1,33 @@
+{
+  "name": "building-secure-serverless-graphql-api-part-1",
+  "version": "1.0.0",
+  "description": "Discover the process of creating a secure serverless GraphQL API leveraging AWS Lambda, AWS AppSync, Amazon Cognito and DynamoDB. Implement BFF pattern with the power of GraphQL.",
+  "scripts": {
+    "deploy:test": "sls deploy --stage=dev",
+    "deploy:prod": "sls deploy --stage=prod",
+    "codegen": "graphql-codegen --config codegen.ts"
+  },
+  "keywords": [],
+  "author": "Piotr Swiatek",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.515.0",
+    "@aws-sdk/lib-dynamodb": "^3.515.0",
+    "joi": "^17.12.2",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/typescript": "4.0.6",
+    "@types/aws-lambda": "^8.10.133",
+    "@types/uuid": "^9.0.8",
+    "fork-ts-checker-webpack-plugin": "^9.0.2",
+    "graphql": "^16.8.1",
+    "serverless": "^3.38.0",
+    "serverless-appsync-plugin": "^2.7.0",
+    "serverless-iam-roles-per-function": "^3.2.0",
+    "serverless-webpack": "^5.13.0",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.90.2"
+  }
+}

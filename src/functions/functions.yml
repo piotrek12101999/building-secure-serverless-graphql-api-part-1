@@ -1,0 +1,108 @@
+getOrders:
+  handler: src/functions/query/getOrders/getOrders.handler
+  environment:
+    ORDER_TABLE: !Ref OrderTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action: dynamodb:Query
+      Resource: !Sub ${OrderTable.Arn}/index/byEmailAndCreatedDate
+getProducts:
+  handler: src/functions/query/getProducts/getProducts.handler
+  environment:
+    PRODUCT_TABLE: !Ref ProductTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Scan
+      Resource: !GetAtt ProductTable.Arn
+getCategories:
+  handler: src/functions/query/getCategories/getCategories.handler
+  environment:
+    CATEGORY_TABLE: !Ref CategoryTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Scan
+      Resource: !GetAtt CategoryTable.Arn
+placeOrder:
+  handler: src/functions/mutation/placeOrder/placeOrder.handler
+  environment:
+    ORDER_TABLE: !Ref OrderTable
+    PRODUCT_TABLE: !Ref ProductTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+      Resource: !GetAtt OrderTable.Arn
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+      Resource: !GetAtt ProductTable.Arn
+createProduct:
+  handler: src/functions/mutation/createProduct/createProduct.handler
+  environment:
+    PRODUCT_TABLE: !Ref ProductTable
+    CATEGORY_TABLE: !Ref CategoryTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+      Resource: !GetAtt ProductTable.Arn
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+      Resource: !GetAtt CategoryTable.Arn
+createCategory:
+  handler: src/functions/mutation/createCategory/createCategory.handler
+  environment:
+    PRODUCT_TABLE: !Ref ProductTable
+    CATEGORY_TABLE: !Ref CategoryTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:PutItem
+      Resource: !GetAtt CategoryTable.Arn
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+      Resource: !GetAtt ProductTable.Arn
+startProcessingOrder:
+  handler: src/functions/mutation/startProcessingOrder/startProcessingOrder.handler
+  environment:
+    ORDER_TABLE: !Ref OrderTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+      Resource: !GetAtt OrderTable.Arn
+completeOrder:
+  handler: src/functions/mutation/completeOrder/completeOrder.handler
+  environment:
+    ORDER_TABLE: !Ref OrderTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+      Resource: !GetAtt OrderTable.Arn
+categories:
+  handler: src/functions/field/categories/categories.handler
+  environment:
+    CATEGORY_TABLE: !Ref CategoryTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+      Resource: !GetAtt CategoryTable.Arn
+products:
+  handler: src/functions/field/products/products.handler
+  environment:
+    PRODUCT_TABLE: !Ref ProductTable
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:GetItem
+      Resource: !GetAtt ProductTable.Arn

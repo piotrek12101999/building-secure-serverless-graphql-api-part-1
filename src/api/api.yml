@@ -1,0 +1,77 @@
+name: secure-graphql-api
+resolvers:
+  Query.getOrders:
+    kind: UNIT
+    dataSource: getOrdersDataSource
+  Query.getCategories:
+    kind: UNIT
+    dataSource: getCategoriesDataSource
+  Query.getProducts:
+    kind: UNIT
+    dataSource: getProductsDataSource
+  Mutation.createProduct:
+    kind: UNIT
+    dataSource: createProductDataSource
+  Mutation.createCategory:
+    kind: UNIT
+    dataSource: createCategoryDataSource
+  Mutation.placeOrder:
+    kind: UNIT
+    dataSource: placeOrderDataSource
+  Mutation.startProcessingOrder:
+    kind: UNIT
+    dataSource: startProcessingOrderDataSource
+  Mutation.completeOrder:
+    kind: UNIT
+    dataSource: completeOrderDataSource
+  getProductCategories:
+    type: Product
+    field: categories
+    kind: UNIT
+    dataSource: categoriesDataSource
+  getCategoryProducts:
+    type: Category
+    field: products
+    kind: UNIT
+    dataSource: productsDataSource
+dataSources:
+  getOrdersDataSource:
+    type: AWS_LAMBDA
+    config:
+      functionArn: !GetAtt GetOrdersLambdaFunction.Arn
+  getProductsDataSource:
+    type: AWS_LAMBDA
+    config:
+      functionArn: !GetAtt GetProductsLambdaFunction.Arn
+  getCategoriesDataSource:
+    type: AWS_LAMBDA
+    config:
+      functionArn: !GetAtt GetCategoriesLambdaFunction.Arn
+  placeOrderDataSource:
+    type: AWS_LAMBDA
+    config:
+      functionArn: !GetAtt PlaceOrderLambdaFunction.Arn
+  createProductDataSource:
+    type: AWS_LAMBDA
+    config:
+      functionArn: !GetAtt CreateProductLambdaFunction.Arn
+  createCategoryDataSource:
+    type: AWS_LAMBDA
+    config:
+      functionArn: !GetAtt CreateCategoryLambdaFunction.Arn
+  startProcessingOrderDataSource:
+    type: AWS_LAMBDA
+    config:
+      functionArn: !GetAtt StartProcessingOrderLambdaFunction.Arn
+  completeOrderDataSource:
+    type: AWS_LAMBDA
+    config:
+      functionArn: !GetAtt CompleteOrderLambdaFunction.Arn
+  categoriesDataSource:
+    type: AWS_LAMBDA
+    config:
+      functionArn: !GetAtt CategoriesLambdaFunction.Arn
+  productsDataSource:
+    type: AWS_LAMBDA
+    config:
+      functionArn: !GetAtt ProductsLambdaFunction.Arn

@@ -1,0 +1,76 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type Query {
+    getProducts: [Product!]
+    getCategories: [Category!]
+    getOrders(email: AWSEmail!): [Order!]
+}
+
+type Mutation {
+    placeOrder(input: OrderInput!): Order!
+    createProduct(input: ProductInput!): Product!
+    createCategory(input: CategoryInput!): Category!
+    startProcessingOrder(id: ID!): Order!
+    completeOrder(id: ID!): Order!
+}
+
+type Category {
+    id: ID!
+    name: String!
+    products: [Product!]
+}
+
+type Product {
+    id: ID!
+    name: String!
+    description: String
+    price: String!
+    created: AWSDateTime!
+    categories: [Category!]
+}
+
+enum OrderStatus {
+    PENDING,
+    PROCESSING,
+    COMPLETED
+}
+
+type Order {
+    id: ID!
+    purchaserEmail: AWSEmail!
+    status: OrderStatus!
+    products: [Product!]
+    totalPrice: String!
+    created: AWSDateTime!
+}
+
+enum Currency {
+    USD,
+    GBP
+}
+
+input PriceInput {
+    currency: Currency!
+    amount: Float!
+}
+
+
+input ProductInput {
+    name: String!
+    description: String
+    price: PriceInput!
+    categories: [ID!]!
+}
+
+input CategoryInput {
+    name: String!
+    products: [ID!]!
+}
+
+input OrderInput {
+    products: [ID!]!
+    purchaserEmail: AWSEmail!
+}
