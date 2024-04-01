@@ -1,4 +1,10 @@
 name: secure-graphql-api
+schema: src/api/schema.graphql
+authentication:
+  type: API_KEY
+apiKeys:
+  - name: WebClientApiKey
+    expiresAfter: 1M
 resolvers:
   Query.getOrders:
     kind: UNIT
@@ -15,9 +21,7 @@ resolvers:
   Mutation.createCategory:
     kind: UNIT
     dataSource: createCategoryDataSource
-  Mutation.placeOrder:
-    kind: UNIT
-    dataSource: placeOrderDataSource
+
   Mutation.startProcessingOrder:
     kind: UNIT
     dataSource: startProcessingOrderDataSource

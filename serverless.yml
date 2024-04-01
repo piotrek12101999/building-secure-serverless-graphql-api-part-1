@@ -14,7 +14,7 @@ custom:
     includeModules: false
     packager: "yarn"
   configFile: ${file(.env.${opt:stage, 'dev'}.yml):}
-  resourceSlug: secure-graphql-${self:custom.configFile.STAGE}
+  resourceSlug: secure-graphql-part-1-${self:custom.configFile.STAGE}
 
 provider:
   name: aws

@@ -16,5 +16,5 @@ export const handler: AppSyncResolverHandler<
   const order = await orderRepository.findById(event.arguments.id);
   await orderRepository.updateStatus(order.id, OrderStatus.Completed);
 
-  return order;
+  return { ...order, status: OrderStatus.Completed };
 };
