@@ -1,7 +1,7 @@
 {
   "name": "building-secure-serverless-graphql-api-part-1",
   "version": "1.0.0",
-  "description": "Discover the process of creating a secure serverless GraphQL API leveraging AWS Lambda, AWS AppSync, Amazon Cognito and DynamoDB. Implement BFF pattern with the power of GraphQL.",
+  "description": "Discover the process of creating a secure serverless GraphQL API leveraging AWS Lambda, AWS AppSync, Amazon Cognito, AWS WAF, AWS X-Ray and DynamoDB. Implement BFF pattern with the power of GraphQL.",
   "scripts": {
     "deploy:test": "sls deploy --stage=dev",
     "deploy:prod": "sls deploy --stage=prod",
